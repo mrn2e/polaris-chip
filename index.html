@@ -15,7 +15,9 @@
       padding: 0;
       font-family: sans-serif;
       background-color: #ededed;
+      --my-card-bg-color: #A44A3F;
     }
+   
     polaris-chip {
       margin: 16px;
     }
@@ -32,8 +34,12 @@
   <polaris-chip title="Grants and donations"></polaris-chip>
 
   <h1>my-card</h1>
-  <my-card></my-card>
+  <my-card>
+  </my-card>
 
+  <my-card img="https://iam.hax.psu.edu/mjr7285/sites/hwblog/files/Screenshot%202026-01-22%201419573.png"></my-card>
+
+  <my-card desc="HELLOW???" title="girl Im TESTING"></my-card> //FIXME: how make desc work??
   <!-- this is what is bringing in the definition for this tag -->
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
