@@ -1,26 +1,47 @@
 import { LitElement, html, css } from 'lit';
-
-/**
- * Now it's your turn. Here's what we need to try and do:
- * 1. Get you HTML from your card working in here 
- * 2. Get your CSS rescoped as needed to work here
- */
-
 export class MyCard extends LitElement {
 
   static get tag() {
     return 'my-card';
   }
 
+  constructor() {
+    super();
+    this.title = "Simple card";
+    this.img = "https://oer.hax.psu.edu/mjr7285/sites/hwblog/files/Screenshot%202026-01-22%201420111.png";
+    this.desc = "IMG Description: Meme created in part one of homework. Further notes found on HW pt.1 blog post";
+    this.alt = "Meme made in HW week one, part one";
+    this.details = "Details";
+    this.fancy = false;
+  }
+
   static get styles() {
     return css`
-      :host {
+       
+       .container {
+        display: inline-block;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+       }
+        
         .card {
-  background-color: var(--my-card-bg-color, #A44A3F);
+  background-color: var(--my-card-bg-color);
   max-width: 400px;
+  height: 600px;
   margin: 0 auto;
   display: inline-block;
+  border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
   padding: 0;
+}
+
+:host([fancy]){
+display: inline-block;
+max-width: 410px;
+  background-color: pink;
+  border: 2px solid fuchsia;
+  box-shadow: 10px 5px 5px red;
 }
 
 .header {
@@ -36,12 +57,13 @@ export class MyCard extends LitElement {
   font-size: 18px;
   font-weight: bold;
   margin: 20px;
+  margin-bottom: 10px;
   color: #F19C79;
   
 }
 
 .btnn {
-  display: none;
+  // display: none; commented out so I can play with it
   background-color: #F6F4D2;
   color: #CBDFBD;
   font-size: 30px;
@@ -50,10 +72,19 @@ export class MyCard extends LitElement {
   border: 10px solid #F54927;
 }
 
+.text{
+  max-height: 300x;
+  overflow-y: auto;
+}
+
 .item {
-  max-width: 300px;
+  width: 300px;
+  height: 200px;
   margin: 50px;
   margin-bottom: 7px;
+  object-fit: cover;
+  justify-content: center;
+  border-radius: 8px;
 }
 
 @media screen and (min-width: 500px) and (max-width: 800px) {
@@ -69,43 +100,55 @@ export class MyCard extends LitElement {
   }
 }
 
-      }
+      
     `;
   }
 
-  constructor() {
-    super();
-    this.title = "My card";
-    this.img = "https://oer.hax.psu.edu/mjr7285/sites/hwblog/files/Screenshot%202026-01-22%201420111.png";
-    this.desc = "IMG Description: Meme created in part one of homework. Further notes found on HW pt.1 blog post"
-    this.alt = "Meme made in HW week one, part one";
-
-  }
-
   render() {
-    return html`<div class="card">
-  <div class="wrapper">
-  <h1 class="header">Simple Card</h1>
+    return html`
+    <div class="container">
+    <div class="card">
+  
+  <h1 class="header">${this.title}</h1>
 <div class="card__btn">   
   <a href="https://hax.psu.edu" class="details-btn">
-    <button class="btnn"> Details </button>
+    <button class="btnn"> ${this.details} </button>
   </a>
 </div>
 <div class="card__img">
   <img class="item" src="${this.img}" alt="${this.alt}"/>
-  <p class="desc">${this.desc}</p>
+  <p class="desc">
+    <details ?open="${this.fancy}" @toggle="${this.openChanged}">
+  <summary>Description</summary>
+  <div class="text">
+    <slot>${this.desc}</slot>
+  </div>
+</details>
+</p>
 </div>  
   </div>
-</div>
+  </div>
 `;
   }
 
+  openChanged(e) {
+  console.log(e);
+  if (e.target.getAttribute('open') !== null) {
+    this.fancy = true;
+  }
+  else {
+    this.fancy = false;
+  }
+}
+
   static get properties() {
     return {
-      title: { type: String },
+      title: { type: String, reflect: true },
       img: { type: String },
       desc: { type: String },
       alt: { type: String },
+      details: { type: String },
+      fancy: { type: Boolean, reflect: true },
     };
   }
 }
