@@ -26,7 +26,7 @@ export class MyCard extends LitElement {
        }
         
         .card {
-  background-color: var(--my-card-bg-color);
+  background-color: var(--my-card-bg-color, #FFCDB2);
   max-width: 400px;
   height: 600px;
   margin: 0 auto;
@@ -59,22 +59,27 @@ max-width: 410px;
   margin: 20px;
   margin-bottom: 10px;
   color: #F19C79;
-  
 }
 
 .btnn {
   // display: none; commented out so I can play with it
-  background-color: #F6F4D2;
-  color: #CBDFBD;
+  background-color: #FFB4A2;
+  color: #6D6875;
   font-size: 30px;
   margin: 10px 120px;
   padding: 20px;
-  border: 10px solid #F54927;
+  border-radius: 8px;
+  border: 10px solid #B5838D;
 }
 
 .text{
-  max-height: 300x;
+  max-height: 100px;
   overflow-y: auto;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  color: brown;
 }
 
 .item {
