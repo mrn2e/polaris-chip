@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import "@haxtheweb/meme-maker/meme-maker.js";
 export class MyCard extends LitElement {
 
   static get tag() {
@@ -82,12 +83,11 @@ max-width: 410px;
   color: brown;
 }
 
-.item {
+ meme-maker {
   width: 300px;
   height: 200px;
+  overflow: hidden;
   margin: 50px;
-  margin-bottom: 7px;
-  object-fit: cover;
   justify-content: center;
   border-radius: 8px;
 }
@@ -120,8 +120,12 @@ max-width: 410px;
     <button class="btnn"> ${this.details} </button>
   </a>
 </div>
-<div class="card__img">
-  <img class="item" src="${this.img}" alt="${this.alt}"/>
+<div class="card_img">
+  <meme-maker class="meme-img"
+alt="Up your meme game with hax and allow for more accessible memes"
+image-url="${this.img}"
+alt="${this.alt}">
+</meme-maker>
   <p class="desc">
     <details ?open="${this.fancy}" @toggle="${this.openChanged}">
   <summary>Description</summary>
